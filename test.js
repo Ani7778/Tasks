@@ -26,11 +26,8 @@ function charOccurrences(str){
         if(count) {
             countCharOcc[getChar] = count + 1;
         } else countCharOcc[getChar] = 1;
-
-        console.log(getChar + " Occurrences=" +
-            countCharOcc[getChar]);
     }
-    
+
     return countCharOcc;
 }
 
