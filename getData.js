@@ -14,7 +14,7 @@ getResponse();
 
 axios.get(url)
 .then(function (response) {
-    return response.data
+    response.data
 })
 .catch(function (err)  {
     console.error("Failed", err);
