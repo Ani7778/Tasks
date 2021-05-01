@@ -11,12 +11,16 @@ const users = [
 
 ]
 
-app.get('/', function (req, res) {
-    res.send('Hello World!1!!');
-});
-
 app.get('/api/users', function (req, res) {
     res.send(users);
+});
+
+app.get('/api/users/:id', function (req, res) {
+    const user = users.find(us => us.id === parseInt(req.params.id));
+
+    if(!user) return res.status(404).send('The user with the given ID was not found');
+
+    res.send(user);
 });
 
 app.post('/api/users', function (req, res) {
@@ -27,10 +31,9 @@ app.post('/api/users', function (req, res) {
 
     const result = schema.validate(req.body);
 
-    if (result.error) {
-        res.status(400).send(result.error.details[0].message);
-        return;
-    }
+    if (result.error) return res.status(400).send(result.error.details[0].message);
+        ;
+
     const user = {
         id: users.length + 1,
         name: req.body.name,
@@ -41,18 +44,19 @@ app.post('/api/users', function (req, res) {
     res.send(user);
 })
 
-app.get('/api/users/:id', function (req, res) {
+app.delete('/api/users/:id', function (req, res) {
     const user = users.find(us => us.id === parseInt(req.params.id));
 
-    if(!user) {
-        res.status(404).send('The user with the given ID was not found')
-    }
+    if(!user) return res.status(404).send('The user with the given ID was not found');
+
+    const index = users.indexOf(user);
+    users.splice(index, 1);
+
     res.send(user);
-});
+})
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
     console.log(`Listening on port ${port} ...`)
 });
-
