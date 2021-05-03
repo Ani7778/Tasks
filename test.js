@@ -28,10 +28,7 @@ function charOccurrences(str){
         } else countCharOcc[getChar] = 1;
     }
 
-    for (getChar in countCharOcc){
-        console.log(getChar + " Occurrences=" +
-            countCharOcc[getChar]);
-    }
+    return countCharOcc;
 }
 
 charOccurrences('assvghyyuuulonnnm');
