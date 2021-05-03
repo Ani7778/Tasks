@@ -11,7 +11,7 @@ function getUsers(req, res) {
 function getSingleUser(req, res) {
     const user = users.find(us => us.id === parseInt(req.params.id));
 
-    if (!user) return res.status(404).send({
+    if (!user) return res.status(404).json({
         "error": {
             "code": 404,
             "message": "The user with the given ID was not found"
@@ -44,7 +44,7 @@ function addUser(req, res) {
 function deleteUser(req, res) {
     const user = users.find(us => us.id === parseInt(req.params.id));
 
-    if(!user) return res.status(404).send({
+    if(!user) return res.status(404).json({
         "error": {
             "code": 404,
             "message": "The user with the given ID was not found"
